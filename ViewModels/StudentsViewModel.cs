@@ -48,5 +48,6 @@ public class StudentRow(Student student, int booksOut)
     public string Id       => student.Id;
     public string Name     => student.Name;
     public string Grade    => student.Grade;
+    public string Teacher  => student.HomeroomTeacher;
     public int    BooksOut => booksOut;
 }

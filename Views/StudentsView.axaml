@@ -26,6 +26,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name"      Binding="{Binding Name}"     Width="*"   />
                 <DataGridTextColumn Header="Grade"     Binding="{Binding Grade}"    Width="100" />
+                <DataGridTextColumn Header="Teacher"     Binding="{Binding Teacher}"    Width="100" />
                 <DataGridTextColumn Header="Books Out" Binding="{Binding BooksOut}" Width="100" />
             </DataGrid.Columns>
         </DataGrid>

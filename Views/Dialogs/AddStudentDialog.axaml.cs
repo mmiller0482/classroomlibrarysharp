@@ -16,7 +16,9 @@ public partial class AddStudentDialog : Window
         Close(new Student
         {
             Name  = name,
-            Grade = GradeBox.Text?.Trim() ?? string.Empty
+            Grade = GradeBox.Text?.Trim() ?? string.Empty,
+            HomeroomTeacher = TeacherBox.Text?.Trim() ?? string.Empty
+            
         });
     }
 
