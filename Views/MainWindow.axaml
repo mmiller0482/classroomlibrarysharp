@@ -1,0 +1,27 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:ClassroomLibrary.ViewModels"
+        xmlns:views="clr-namespace:ClassroomLibrary.Views"
+        x:Class="ClassroomLibrary.Views.MainWindow"
+        Title="Classroom Library"
+        Width="920" Height="640"
+        MinWidth="700" MinHeight="450"
+        WindowStartupLocation="CenterScreen">
+
+    <TabControl SelectedIndex="{Binding SelectedTabIndex}"
+                Padding="8,4,8,8">
+
+        <TabItem Header="📚  Books">
+            <views:BooksView DataContext="{Binding Books}" />
+        </TabItem>
+
+        <TabItem Header="👩‍🎓  Students">
+            <views:StudentsView DataContext="{Binding Students}" />
+        </TabItem>
+
+        <TabItem Header="🔖  Checkouts">
+            <views:CheckoutsView DataContext="{Binding Checkouts}" />
+        </TabItem>
+
+    </TabControl>
+</Window>

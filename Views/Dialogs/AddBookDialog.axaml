@@ -1,0 +1,55 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ClassroomLibrary.Views.Dialogs.AddBookDialog"
+        Title="Add Book"
+        Width="400" Height="360"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        ShowInTaskbar="False">
+
+    <DockPanel Margin="16">
+
+        <!-- Buttons -->
+        <StackPanel DockPanel.Dock="Bottom"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Spacing="8"
+                    Margin="0,16,0,0">
+            <Button Content="Add Book" Click="OnAddClick" IsDefault="True" />
+            <Button Content="Cancel"   Click="OnCancelClick" IsCancel="True" />
+        </StackPanel>
+
+        <!-- Form -->
+        <StackPanel Spacing="10">
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Title *" FontWeight="SemiBold" />
+                <TextBox x:Name="TitleBox" />
+            </StackPanel>
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Author" FontWeight="SemiBold" />
+                <TextBox x:Name="AuthorBox" />
+            </StackPanel>
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Genre" FontWeight="SemiBold" />
+                <TextBox x:Name="GenreBox" />
+            </StackPanel>
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="ISBN" FontWeight="SemiBold" />
+                <TextBox x:Name="ISBNBox" />
+            </StackPanel>
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Number of Copies" FontWeight="SemiBold" />
+                <NumericUpDown x:Name="CopiesBox"
+                               Minimum="1" Maximum="999"
+                               Value="1"
+                               FormatString="0" />
+            </StackPanel>
+
+        </StackPanel>
+    </DockPanel>
+</Window>

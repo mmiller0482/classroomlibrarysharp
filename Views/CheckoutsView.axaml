@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ClassroomLibrary.Views.CheckoutsView">
+
+    <DockPanel Margin="8">
+
+        <!-- Toolbar -->
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    Spacing="8"
+                    Margin="0,0,0,8">
+            <Button Content="Checkout Book" Click="OnCheckoutClick" />
+            <Button Content="Return Book"   Click="OnReturnClick"
+                    IsEnabled="{Binding SelectedCheckout, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        </StackPanel>
+
+        <!-- Active checkouts -->
+        <DataGrid ItemsSource="{Binding ActiveCheckouts}"
+                  SelectedItem="{Binding SelectedCheckout}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True"
+                  CanUserSortColumns="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Book"        Binding="{Binding BookTitle}"    Width="*"   />
+                <DataGridTextColumn Header="Student"     Binding="{Binding StudentName}"  Width="160" />
+                <DataGridTextColumn Header="Checked Out" Binding="{Binding CheckoutDate}" Width="120" />
+                <DataGridTextColumn Header="Due Date"    Binding="{Binding DueDate}"      Width="120" />
+                <DataGridTextColumn Header="Status"      Binding="{Binding Status}"       Width="90"  />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </DockPanel>
+</UserControl>

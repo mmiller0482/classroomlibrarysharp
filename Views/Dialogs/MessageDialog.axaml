@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ClassroomLibrary.Views.Dialogs.MessageDialog"
+        Width="340" Height="160"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        ShowInTaskbar="False">
+
+    <DockPanel Margin="16">
+
+        <Button DockPanel.Dock="Bottom"
+                Content="OK"
+                HorizontalAlignment="Right"
+                IsDefault="True"
+                Click="OnOkClick" />
+
+        <StackPanel Spacing="8" VerticalAlignment="Center">
+            <TextBlock x:Name="TitleText" FontWeight="Bold" FontSize="14" />
+            <TextBlock x:Name="BodyText"  TextWrapping="Wrap" />
+        </StackPanel>
+
+    </DockPanel>
+</Window>

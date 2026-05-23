@@ -1,0 +1,37 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ClassroomLibrary.Views.Dialogs.AddStudentDialog"
+        Title="Add Student"
+        Width="360" Height="220"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        ShowInTaskbar="False">
+
+    <DockPanel Margin="16">
+
+        <!-- Buttons -->
+        <StackPanel DockPanel.Dock="Bottom"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Spacing="8"
+                    Margin="0,16,0,0">
+            <Button Content="Add Student" Click="OnAddClick" IsDefault="True" />
+            <Button Content="Cancel"      Click="OnCancelClick" IsCancel="True" />
+        </StackPanel>
+
+        <!-- Form -->
+        <StackPanel Spacing="10">
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Name *" FontWeight="SemiBold" />
+                <TextBox x:Name="NameBox" />
+            </StackPanel>
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Grade" FontWeight="SemiBold" />
+                <TextBox x:Name="GradeBox" Watermark="e.g. 3rd, 4th, 5th …" />
+            </StackPanel>
+
+        </StackPanel>
+    </DockPanel>
+</Window>

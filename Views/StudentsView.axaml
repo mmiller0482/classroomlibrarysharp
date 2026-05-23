@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ClassroomLibrary.Views.StudentsView">
+
+    <DockPanel Margin="8">
+
+        <!-- Toolbar -->
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    Spacing="8"
+                    Margin="0,0,0,8">
+            <Button Content="Add Student"     Click="OnAddStudentClick" />
+            <Button Content="Remove Selected" Click="OnRemoveStudentClick"
+                    IsEnabled="{Binding SelectedStudent, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        </StackPanel>
+
+        <!-- Student list -->
+        <DataGrid ItemsSource="{Binding Students}"
+                  SelectedItem="{Binding SelectedStudent}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True"
+                  CanUserSortColumns="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name"      Binding="{Binding Name}"     Width="*"   />
+                <DataGridTextColumn Header="Grade"     Binding="{Binding Grade}"    Width="100" />
+                <DataGridTextColumn Header="Books Out" Binding="{Binding BooksOut}" Width="100" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </DockPanel>
+</UserControl>

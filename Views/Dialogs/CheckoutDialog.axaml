@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ClassroomLibrary.Views.Dialogs.CheckoutDialog"
+        Title="Checkout Book"
+        Width="420" Height="280"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        ShowInTaskbar="False">
+
+    <DockPanel Margin="16">
+
+        <!-- Buttons -->
+        <StackPanel DockPanel.Dock="Bottom"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Spacing="8"
+                    Margin="0,16,0,0">
+            <Button Content="Checkout" Click="OnCheckoutClick" IsDefault="True" />
+            <Button Content="Cancel"   Click="OnCancelClick"   IsCancel="True" />
+        </StackPanel>
+
+        <!-- Form -->
+        <StackPanel Spacing="12">
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Book" FontWeight="SemiBold" />
+                <ComboBox x:Name="BookCombo" HorizontalAlignment="Stretch" />
+            </StackPanel>
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Student" FontWeight="SemiBold" />
+                <ComboBox x:Name="StudentCombo" HorizontalAlignment="Stretch" />
+            </StackPanel>
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Due Date" FontWeight="SemiBold" />
+                <CalendarDatePicker x:Name="DueDatePicker"
+                                    HorizontalAlignment="Stretch"
+                                    SelectedDateFormat="Long" />
+            </StackPanel>
+
+        </StackPanel>
+    </DockPanel>
+</Window>

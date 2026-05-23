@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ClassroomLibrary.Views.BooksView">
+
+    <DockPanel Margin="8">
+
+        <!-- Toolbar -->
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    Spacing="8"
+                    Margin="0,0,0,8">
+            <Button Content="Add Book"        Click="OnAddBookClick" />
+            <Button Content="Remove Selected" Click="OnRemoveBookClick"
+                    IsEnabled="{Binding SelectedBook, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        </StackPanel>
+
+        <!-- Book list -->
+        <DataGrid ItemsSource="{Binding Books}"
+                  SelectedItem="{Binding SelectedBook}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True"
+                  CanUserSortColumns="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title"        Binding="{Binding Title}"          Width="*"   />
+                <DataGridTextColumn Header="Author"       Binding="{Binding Author}"         Width="160" />
+                <DataGridTextColumn Header="Genre"        Binding="{Binding Genre}"          Width="110" />
+                <DataGridTextColumn Header="ISBN"         Binding="{Binding ISBN}"           Width="130" />
+                <DataGridTextColumn Header="Total"        Binding="{Binding TotalCopies}"    Width="60"  />
+                <DataGridTextColumn Header="Available"    Binding="{Binding AvailableCopies}" Width="80" />
+                <DataGridTextColumn Header="Checked Out"  Binding="{Binding CheckedOut}"     Width="95"  />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </DockPanel>
+</UserControl>
