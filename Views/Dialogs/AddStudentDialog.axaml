@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="ClassroomLibrary.Views.Dialogs.AddStudentDialog"
         Title="Add Student"
-        Width="360" Height="260"
+        Width="360" Height="300"
         WindowStartupLocation="CenterOwner"
         CanResize="False"
         ShowInTaskbar="False">
@@ -22,19 +22,26 @@
         <!-- Form -->
         <StackPanel Spacing="10">
 
-            <StackPanel Spacing="2">
-                <TextBlock Text="Name *" FontWeight="SemiBold" />
+            <StackPanel Spacing="8">
+                <TextBlock Text="Name *"
+                           FontWeight="SemiBold" />
                 <TextBox x:Name="NameBox" />
-            </StackPanel>
 
-            <StackPanel Spacing="2">
                 <TextBlock Text="Grade" FontWeight="SemiBold" />
-                <TextBox x:Name="GradeBox" Watermark="e.g. 3rd, 4th, 5th …" />
-            </StackPanel>
-            
-            <StackPanel Spacing="2">
-                <TextBlock Text="Homeroom Teacher" FontWeight="SemiBold" />
-                <TextBox x:Name="TeacherBox" Watermark="Mrs. Miller" />
+                <TextBox x:Name="GradeBox"
+                         Watermark="e.g. 3rd, 4th, 5th …" />
+                
+                <TextBlock Text="Homeroom Teacher"
+                           FontWeight="SemiBold" />
+                <TextBox x:Name="TeacherBox"
+                         Watermark="Mrs. Miller" />
+                
+                <TextBlock x:Name="ErrorBox"
+                           IsVisible="False"
+                           Foreground="Red"
+                           TextWrapping="Wrap"
+                           FontWeight="SemiBold"
+                           Margin="0,4,0,0" />
             </StackPanel>
 
         </StackPanel>
