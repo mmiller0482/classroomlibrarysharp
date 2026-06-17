@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using ClassroomLibrary.Models;
+using ClassroomLibrary.Utils;
 
 namespace ClassroomLibrary.Views.Dialogs;
 
@@ -11,9 +12,11 @@ public partial class AddStudentDialog : Window
 
     private void OnAddClick(object? sender, RoutedEventArgs e)
     {
-        string name = CleanInputString(NameBox.Text);
-        string homeroomTeacher = CleanInputString(TeacherBox.Text);
-        string errorText = GenerateErrorText(name, homeroomTeacher);
+        var name = StringUtils.CleanInputString(NameBox.Text);
+        var grade = StringUtils.CleanInputString(GradeBox.Text);
+        var homeroomTeacher = StringUtils.CleanInputString(TeacherBox.Text);
+
+        var errorText = GenerateErrorText(name, homeroomTeacher);
         if (!string.IsNullOrEmpty(errorText))
         {
            ErrorBox.IsVisible = true;
@@ -24,7 +27,7 @@ public partial class AddStudentDialog : Window
         Close(new Student
         {
             Name  = name,
-            Grade = CleanInputString(GradeBox.Text),
+            Grade = grade,
             HomeroomTeacher = homeroomTeacher
             
         });
@@ -46,7 +49,4 @@ public partial class AddStudentDialog : Window
         return string.Join(", ", errors);
     }
 
-    // TODO: This is widely usable; move to some shared library
-    private static string CleanInputString(string? aString) 
-        => aString?.Trim() ?? string.Empty; 
 }
