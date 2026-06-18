@@ -28,7 +28,7 @@
             </StackPanel>
 
             <StackPanel Spacing="2">
-                <TextBlock Text="Author" FontWeight="SemiBold" />
+                <TextBlock Text="Author *" FontWeight="SemiBold" />
                 <TextBox x:Name="AuthorBox" />
             </StackPanel>
 
@@ -49,6 +49,13 @@
                                Value="1"
                                FormatString="0" />
             </StackPanel>
+
+            <TextBlock x:Name="ErrorBox"
+                       IsVisible="False"
+                       Foreground="Red"
+                       TextWrapping="Wrap"
+                       FontWeight="SemiBold"
+                       Margin="0,4,0,0" />
 
         </StackPanel>
     </DockPanel>

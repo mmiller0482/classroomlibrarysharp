@@ -15,7 +15,7 @@ This file contains actionable tasks to improve the Classroom Library application
 - **Files**: `Views/Dialogs/AddStudentDialog.axaml.cs`
 - **Goal**: Reduce code duplication and follow the TODO in the file.
 
-### [ ] 2. Improve `AddBookDialog` Validation
+### [x] 2. Improve `AddBookDialog` Validation
 - **Description**: Ensure that when adding a book, the Title and Author are not empty (currently, they might allow whitespace or empty strings).
 - **Files**: `Views/Dialogs/AddBookDialog.axaml.cs`
 - **Goal**: Prevent invalid data from entering the library.

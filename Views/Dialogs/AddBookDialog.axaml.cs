@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using ClassroomLibrary.Models;
@@ -16,7 +17,13 @@ public partial class AddBookDialog : Window
         var genre = StringUtils.CleanInputString(GenreBox.Text);
         var isbn = StringUtils.CleanInputString(ISBNBox.Text);
 
-        if (string.IsNullOrEmpty(title)) return;   // Title is required
+        var errorText = GenerateErrorText(title, author);
+        if (!string.IsNullOrEmpty(errorText))
+        {
+            ErrorBox.IsVisible = true;
+            ErrorBox.Text = errorText;
+            return;
+        }
 
         Close(new Book
         {
@@ -29,4 +36,18 @@ public partial class AddBookDialog : Window
     }
 
     private void OnCancelClick(object? sender, RoutedEventArgs e) => Close(null);
+
+    private static string GenerateErrorText(string title, string author)
+    {
+        List<string> errors = [];
+        if (string.IsNullOrEmpty(title))
+        {
+            errors.Add("Title is required");
+        }
+        if (string.IsNullOrEmpty(author))
+        {
+            errors.Add("Author is required");
+        }
+        return string.Join(", ", errors);
+    }
 }
