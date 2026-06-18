@@ -10,6 +10,12 @@
 
     <TabControl SelectedIndex="{Binding SelectedTabIndex}"
                 Padding="8,4,8,8">
+        <TabControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center" />
+            </ItemsPanelTemplate>
+        </TabControl.ItemsPanel>
 
         <TabItem Header="📚  Books">
             <views:BooksView DataContext="{Binding Books}" />
