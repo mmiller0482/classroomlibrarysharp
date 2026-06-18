@@ -16,13 +16,8 @@ public partial class AddStudentDialog : Window
         var grade = StringUtils.CleanInputString(GradeBox.Text);
         var homeroomTeacher = StringUtils.CleanInputString(TeacherBox.Text);
 
-        var errorText = GenerateErrorText(name, homeroomTeacher);
-        if (!string.IsNullOrEmpty(errorText))
-        {
-           ErrorBox.IsVisible = true;
-           ErrorBox.Text = errorText;
-           return;
-        }
+        if (!ValidateInputs(name, homeroomTeacher))
+            return;
 
         Close(new Student
         {
@@ -35,18 +30,26 @@ public partial class AddStudentDialog : Window
 
     private void OnCancelClick(object? sender, RoutedEventArgs e) => Close(null);
 
-    private static string GenerateErrorText(string name, string homeroomTeacher)
+    private bool ValidateInputs(string name, string homeroomTeacher)
     {
         List<string> errors = [];
-        if (string.IsNullOrEmpty(name))
-        {
-            errors.Add("Name is required");
-        }
-        if (string.IsNullOrEmpty(homeroomTeacher))
-        {
-            errors.Add("Homeroom teacher is required");
-        }
-        return string.Join(", ", errors);
-    }
+        Control? firstInvalidControl = null;
 
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            errors.Add("Name is required.");
+            firstInvalidControl = NameBox;
+        }
+        if (string.IsNullOrWhiteSpace(homeroomTeacher))
+        {
+            errors.Add("Homeroom teacher is required.");
+            firstInvalidControl ??= TeacherBox;
+        }
+
+        ErrorBox.Text = string.Join("\n", errors);
+        ErrorBox.IsVisible = errors.Count > 0;
+        firstInvalidControl?.Focus();
+
+        return errors.Count == 0;
+    }
 }

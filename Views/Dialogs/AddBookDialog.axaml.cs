@@ -17,13 +17,8 @@ public partial class AddBookDialog : Window
         var genre = StringUtils.CleanInputString(GenreBox.Text);
         var isbn = StringUtils.CleanInputString(ISBNBox.Text);
 
-        var errorText = GenerateErrorText(title, author);
-        if (!string.IsNullOrEmpty(errorText))
-        {
-            ErrorBox.IsVisible = true;
-            ErrorBox.Text = errorText;
+        if (!ValidateInputs(title, author))
             return;
-        }
 
         Close(new Book
         {
@@ -37,17 +32,26 @@ public partial class AddBookDialog : Window
 
     private void OnCancelClick(object? sender, RoutedEventArgs e) => Close(null);
 
-    private static string GenerateErrorText(string title, string author)
+    private bool ValidateInputs(string title, string author)
     {
         List<string> errors = [];
-        if (string.IsNullOrEmpty(title))
+        Control? firstInvalidControl = null;
+
+        if (string.IsNullOrWhiteSpace(title))
         {
-            errors.Add("Title is required");
+            errors.Add("Title is required.");
+            firstInvalidControl = TitleBox;
         }
-        if (string.IsNullOrEmpty(author))
+        if (string.IsNullOrWhiteSpace(author))
         {
-            errors.Add("Author is required");
+            errors.Add("Author is required.");
+            firstInvalidControl ??= AuthorBox;
         }
-        return string.Join(", ", errors);
+
+        ErrorBox.Text = string.Join("\n", errors);
+        ErrorBox.IsVisible = errors.Count > 0;
+        firstInvalidControl?.Focus();
+
+        return errors.Count == 0;
     }
 }
