@@ -45,9 +45,10 @@ public partial class StudentsViewModel : ObservableObject
 /// <summary>Read-only display row combining Student data with live checkout count.</summary>
 public class StudentRow(Student student, int booksOut)
 {
-    public string Id       => student.Id;
-    public string Name     => student.Name;
-    public string Grade    => student.Grade;
-    public string Teacher  => student.HomeroomTeacher;
-    public int    BooksOut => booksOut;
+    public string Id         => student.Id;
+    public string FirstName  => student.FirstName;
+    public string LastName   => student.LastName;
+    public string Grade      => student.Grade;
+    public string Teacher    => student.HomeroomTeacher;
+    public int    BooksOut   => booksOut;
 }

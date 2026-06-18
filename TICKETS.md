@@ -44,6 +44,11 @@ This file contains actionable tasks to improve the Classroom Library application
 - **Files**: `Views/CheckoutsView.axaml`, `Models/Checkout.cs`
 - **Goal**: Help the teacher quickly identify late books.
 
+### [x] M4. Separate Student First and Last Names
+- **Description**: Separate the first and last names of students in the Students view for better readability.
+- **Files**: `Views/StudentsView.axaml`, `Models/Student.cs`
+- **Goal**: Improve the user experience by making it easier to read and understand student names.
+
 ---
 
 ## 🔴 Priority: High (Core Features)

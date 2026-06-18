@@ -15,7 +15,7 @@ public partial class CheckoutDialog : Window
         BookCombo.ItemsSource    = books;
         StudentCombo.ItemsSource = students;
 
-        // Books and Students use ToString() for display (Title — Author / Name (Grade))
+        // Books and Students use ToString() for display (Title — Author / Full Name (Grade)).
         if (books.Count > 0)    BookCombo.SelectedIndex    = 0;
         if (students.Count > 0) StudentCombo.SelectedIndex = 0;
 

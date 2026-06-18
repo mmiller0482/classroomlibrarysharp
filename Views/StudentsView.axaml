@@ -24,10 +24,11 @@
                   CanUserResizeColumns="True"
                   CanUserSortColumns="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name"      Binding="{Binding Name}"     Width="*"   />
-                <DataGridTextColumn Header="Grade"     Binding="{Binding Grade}"    Width="100" />
-                <DataGridTextColumn Header="Teacher"     Binding="{Binding Teacher}"    Width="100" />
-                <DataGridTextColumn Header="Books Out" Binding="{Binding BooksOut}" Width="100" />
+                <DataGridTextColumn Header="First Name"  Binding="{Binding FirstName}"  Width="*"   />
+                <DataGridTextColumn Header="Last Name"   Binding="{Binding LastName}"   Width="*"   />
+                <DataGridTextColumn Header="Grade"       Binding="{Binding Grade}"      Width="100" />
+                <DataGridTextColumn Header="Teacher"     Binding="{Binding Teacher}"    Width="120" />
+                <DataGridTextColumn Header="Books Out"   Binding="{Binding BooksOut}"   Width="100" />
             </DataGrid.Columns>
         </DataGrid>
 

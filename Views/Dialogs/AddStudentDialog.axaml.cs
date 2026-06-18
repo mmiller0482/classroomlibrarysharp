@@ -12,33 +12,39 @@ public partial class AddStudentDialog : Window
 
     private void OnAddClick(object? sender, RoutedEventArgs e)
     {
-        var name = StringUtils.CleanInputString(NameBox.Text);
+        var firstName = StringUtils.CleanInputString(FirstNameBox.Text);
+        var lastName = StringUtils.CleanInputString(LastNameBox.Text);
         var grade = StringUtils.CleanInputString(GradeBox.Text);
         var homeroomTeacher = StringUtils.CleanInputString(TeacherBox.Text);
 
-        if (!ValidateInputs(name, homeroomTeacher))
+        if (!ValidateInputs(firstName, lastName, homeroomTeacher))
             return;
 
         Close(new Student
         {
-            Name  = name,
+            FirstName = firstName,
+            LastName = lastName,
             Grade = grade,
             HomeroomTeacher = homeroomTeacher
-            
         });
     }
 
     private void OnCancelClick(object? sender, RoutedEventArgs e) => Close(null);
 
-    private bool ValidateInputs(string name, string homeroomTeacher)
+    private bool ValidateInputs(string firstName, string lastName, string homeroomTeacher)
     {
         List<string> errors = [];
         Control? firstInvalidControl = null;
 
-        if (string.IsNullOrWhiteSpace(name))
+        if (string.IsNullOrWhiteSpace(firstName))
         {
-            errors.Add("Name is required.");
-            firstInvalidControl = NameBox;
+            errors.Add("First name is required.");
+            firstInvalidControl = FirstNameBox;
+        }
+        if (string.IsNullOrWhiteSpace(lastName))
+        {
+            errors.Add("Last name is required.");
+            firstInvalidControl ??= LastNameBox;
         }
         if (string.IsNullOrWhiteSpace(homeroomTeacher))
         {

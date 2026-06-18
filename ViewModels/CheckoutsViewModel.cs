@@ -32,7 +32,7 @@ public partial class CheckoutsViewModel : ObservableObject
         foreach (var checkout in _service.GetActiveCheckouts())
         {
             var bookTitle   = books.TryGetValue(checkout.BookId, out var b) ? b.Title : "Unknown";
-            var studentName = students.TryGetValue(checkout.StudentId, out var s) ? s.Name : "Unknown";
+            var studentName = students.TryGetValue(checkout.StudentId, out var s) ? s.FullName : "Unknown";
             ActiveCheckouts.Add(new CheckoutRow(checkout, bookTitle, studentName));
         }
     }
