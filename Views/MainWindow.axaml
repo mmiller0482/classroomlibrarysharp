@@ -29,9 +29,5 @@
             <views:CheckoutsView DataContext="{Binding Checkouts}" />
         </TabItem>
 
-        <TabItem Header="⚙️  Settings">
-            <views:SettingsView DataContext="{Binding Settings}" />
-        </TabItem>
-
     </TabControl>
 </Window>

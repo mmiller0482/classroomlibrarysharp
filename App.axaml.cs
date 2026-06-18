@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -9,6 +10,8 @@ namespace ClassroomLibrary;
 
 public partial class App : Application
 {
+    private SettingsWindow? _settingsWindow;
+
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
     public override void OnFrameworkInitializationCompleted()
@@ -23,5 +26,29 @@ public partial class App : Application
             };
         }
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private void Settings_OnClick(object? sender, EventArgs e)
+    {
+        if (_settingsWindow is not null)
+        {
+            _settingsWindow.Activate();
+            return;
+        }
+
+        if (ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime
+            {
+                MainWindow: { DataContext: MainWindowViewModel viewModel } owner
+            })
+        {
+            return;
+        }
+
+        _settingsWindow = new SettingsWindow
+        {
+            DataContext = viewModel.Settings
+        };
+        _settingsWindow.Closed += (_, _) => _settingsWindow = null;
+        _settingsWindow.Show(owner);
     }
 }

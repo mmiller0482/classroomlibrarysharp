@@ -67,9 +67,9 @@ This file contains actionable tasks to improve the Classroom Library application
 
 ## 🟣 Priority: Indefinite (Nice to Haves)
 
-### [ ] I1. Give the Menu Bar App a Name
+### [x] I1. Give the Menu Bar App a Name
 - **Description**: Rename Menu Bar App menu from "Avalonia Application" to "Classroom Library"
-- **Files**: IDK
+- **Files**: `App.axaml`
 - **Goal**: Reflect the purpose of the application and make it seem less generic.
 
 ### [x] I2. Factor out color schemes to a file and implement "light and dark mode"
