@@ -16,9 +16,10 @@ public partial class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             var service = new LibraryService();
+            var themeService = new ThemeService();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(service)
+                DataContext = new MainWindowViewModel(service, themeService)
             };
         }
         base.OnFrameworkInitializationCompleted();

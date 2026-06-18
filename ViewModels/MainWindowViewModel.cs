@@ -8,14 +8,16 @@ public partial class MainWindowViewModel : ObservableObject
     public BooksViewModel    Books    { get; }
     public StudentsViewModel Students { get; }
     public CheckoutsViewModel Checkouts { get; }
+    public SettingsViewModel Settings { get; }
 
     [ObservableProperty] private int _selectedTabIndex;
 
-    public MainWindowViewModel(LibraryService service)
+    public MainWindowViewModel(LibraryService service, ThemeService themeService)
     {
         Books     = new BooksViewModel(service);
         Students  = new StudentsViewModel(service);
         Checkouts = new CheckoutsViewModel(service);
+        Settings  = new SettingsViewModel(themeService);
     }
 
     // Refresh the newly-active tab so it always shows current data.

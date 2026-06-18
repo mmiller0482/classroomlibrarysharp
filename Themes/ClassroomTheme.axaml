@@ -1,0 +1,51 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:services="clr-namespace:ClassroomLibrary.Services">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <!-- Fluent consumes these keys for selection, focus, and accent controls. -->
+            <Color x:Key="SystemAccentColor">#477A50</Color>
+            <Color x:Key="SystemAccentColorLight1">#5F9167</Color>
+            <Color x:Key="SystemAccentColorLight2">#79A980</Color>
+            <Color x:Key="SystemAccentColorLight3">#95C09B</Color>
+            <Color x:Key="SystemAccentColorDark1">#386440</Color>
+            <Color x:Key="SystemAccentColorDark2">#294E31</Color>
+            <Color x:Key="SystemAccentColorDark3">#1B3922</Color>
+
+            <SolidColorBrush x:Key="ClassroomBackgroundBrush" Color="#F6F8F3" />
+            <SolidColorBrush x:Key="ClassroomSurfaceBrush" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="ClassroomBorderBrush" Color="#CAD8C7" />
+            <SolidColorBrush x:Key="ClassroomMutedForegroundBrush" Color="#59695C" />
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Dark">
+            <Color x:Key="SystemAccentColor">#83C98D</Color>
+            <Color x:Key="SystemAccentColorLight1">#99D6A1</Color>
+            <Color x:Key="SystemAccentColorLight2">#AFE2B5</Color>
+            <Color x:Key="SystemAccentColorLight3">#C6EDCA</Color>
+            <Color x:Key="SystemAccentColorDark1">#68AF73</Color>
+            <Color x:Key="SystemAccentColorDark2">#4F955B</Color>
+            <Color x:Key="SystemAccentColorDark3">#387B44</Color>
+
+            <SolidColorBrush x:Key="ClassroomBackgroundBrush" Color="#121814" />
+            <SolidColorBrush x:Key="ClassroomSurfaceBrush" Color="#1B241D" />
+            <SolidColorBrush x:Key="ClassroomBorderBrush" Color="#3A4D3E" />
+            <SolidColorBrush x:Key="ClassroomMutedForegroundBrush" Color="#B3C2B5" />
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="{x:Static services:AppThemeVariants.CoolBlue}">
+            <Color x:Key="SystemAccentColor">#2878B8</Color>
+            <Color x:Key="SystemAccentColorLight1">#438CC5</Color>
+            <Color x:Key="SystemAccentColorLight2">#61A0D1</Color>
+            <Color x:Key="SystemAccentColorLight3">#82B6DD</Color>
+            <Color x:Key="SystemAccentColorDark1">#20649A</Color>
+            <Color x:Key="SystemAccentColorDark2">#184F7B</Color>
+            <Color x:Key="SystemAccentColorDark3">#113B5D</Color>
+
+            <SolidColorBrush x:Key="ClassroomBackgroundBrush" Color="#F2F7FB" />
+            <SolidColorBrush x:Key="ClassroomSurfaceBrush" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="ClassroomBorderBrush" Color="#BFD3E2" />
+            <SolidColorBrush x:Key="ClassroomMutedForegroundBrush" Color="#536B7D" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

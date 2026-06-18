@@ -72,7 +72,7 @@ This file contains actionable tasks to improve the Classroom Library application
 - **Files**: IDK
 - **Goal**: Reflect the purpose of the application and make it seem less generic.
 
-### [ ] I1. Factor out color schemes to a file and implement "light and dark mode"
+### [x] I2. Factor out color schemes to a file and implement "light and dark mode"
 - **Description**: App currently follows system color scheme. Can we implement something to allow it to define its own color scheme(s)?"
-- **Files**: IDK
+- **Files**: `Themes/ClassroomTheme.axaml`, `Services/ThemeService.cs`, `Views/SettingsView.axaml`
 - **Goal**: Beautify the app and setup framework to allow for future theming. 

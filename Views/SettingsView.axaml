@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ClassroomLibrary.Views.SettingsView">
+
+    <ScrollViewer>
+        <StackPanel Width="520"
+                    Margin="24"
+                    HorizontalAlignment="Center"
+                    Spacing="16">
+            <StackPanel Spacing="4">
+                <TextBlock Text="Appearance"
+                           FontSize="24"
+                           FontWeight="SemiBold" />
+                <TextBlock Classes="secondary"
+                           Text="Choose how Classroom Library looks. Changes apply immediately and are remembered."
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Border Classes="card">
+                <Grid ColumnDefinitions="*,220" ColumnSpacing="20">
+                    <StackPanel Spacing="4" VerticalAlignment="Center">
+                        <TextBlock Text="Theme" FontWeight="SemiBold" />
+                        <TextBlock Classes="secondary"
+                                   Text="{Binding SelectedTheme.Description}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <ComboBox Grid.Column="1"
+                              ItemsSource="{Binding ThemeOptions}"
+                              SelectedItem="{Binding SelectedTheme}"
+                              HorizontalAlignment="Stretch">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
