@@ -44,7 +44,8 @@ public class BookRow(Book book, int available)
 {
     public string Id           => book.Id;
     public string Title        => book.Title;
-    public string Author       => book.Author;
+    public string AuthorFirstName => book.AuthorFirstName;
+    public string AuthorLastName  => book.AuthorLastName;
     public string ISBN         => book.ISBN;
     public string Genre        => book.Genre;
     public int TotalCopies     => book.TotalCopies;

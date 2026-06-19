@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="ClassroomLibrary.Views.Dialogs.AddBookDialog"
         Title="Add Book"
-        Width="400" Height="360"
+        Width="400" Height="410"
         WindowStartupLocation="CenterOwner"
         CanResize="False"
         ShowInTaskbar="False">
@@ -28,8 +28,13 @@
             </StackPanel>
 
             <StackPanel Spacing="2">
-                <TextBlock Text="Author *" FontWeight="SemiBold" />
-                <TextBox x:Name="AuthorBox" />
+                <TextBlock Text="Author First Name *" FontWeight="SemiBold" />
+                <TextBox x:Name="AuthorFirstNameBox" />
+            </StackPanel>
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Author Last Name *" FontWeight="SemiBold" />
+                <TextBox x:Name="AuthorLastNameBox" />
             </StackPanel>
 
             <StackPanel Spacing="2">

@@ -49,6 +49,11 @@ This file contains actionable tasks to improve the Classroom Library application
 - **Files**: `Views/StudentsView.axaml`, `Models/Student.cs`
 - **Goal**: Improve the user experience by making it easier to read and understand student names.
 
+### [x] M5. Separate Author First and Last Names
+- **Description**: Separate authors' first and last names in the Books view for consistency with student names.
+- **Files**: `Views/BooksView.axaml`, `Views/Dialogs/AddBookDialog.axaml`, `Views/Dialogs/AddBookDialog.axaml.cs`, `Models/Book.cs`
+- **Goal**: Keep name entry and display consistent across students and authors.
+
 ---
 
 ## 🔴 Priority: High (Core Features)

@@ -13,26 +13,28 @@ public partial class AddBookDialog : Window
     private void OnAddClick(object? sender, RoutedEventArgs e)
     {
         var title = StringUtils.CleanInputString(TitleBox.Text);
-        var author = StringUtils.CleanInputString(AuthorBox.Text);
+        var authorFirstName = StringUtils.CleanInputString(AuthorFirstNameBox.Text);
+        var authorLastName = StringUtils.CleanInputString(AuthorLastNameBox.Text);
         var genre = StringUtils.CleanInputString(GenreBox.Text);
         var isbn = StringUtils.CleanInputString(ISBNBox.Text);
 
-        if (!ValidateInputs(title, author))
+        if (!ValidateInputs(title, authorFirstName, authorLastName))
             return;
 
         Close(new Book
         {
-            Title       = title,
-            Author      = author,
-            Genre       = genre,
-            ISBN        = isbn,
-            TotalCopies = (int)(CopiesBox.Value ?? 1m)
+            Title           = title,
+            AuthorFirstName = authorFirstName,
+            AuthorLastName  = authorLastName,
+            Genre           = genre,
+            ISBN            = isbn,
+            TotalCopies     = (int)(CopiesBox.Value ?? 1m)
         });
     }
 
     private void OnCancelClick(object? sender, RoutedEventArgs e) => Close(null);
 
-    private bool ValidateInputs(string title, string author)
+    private bool ValidateInputs(string title, string authorFirstName, string authorLastName)
     {
         List<string> errors = [];
         Control? firstInvalidControl = null;
@@ -42,10 +44,15 @@ public partial class AddBookDialog : Window
             errors.Add("Title is required.");
             firstInvalidControl = TitleBox;
         }
-        if (string.IsNullOrWhiteSpace(author))
+        if (string.IsNullOrWhiteSpace(authorFirstName))
         {
-            errors.Add("Author is required.");
-            firstInvalidControl ??= AuthorBox;
+            errors.Add("Author first name is required.");
+            firstInvalidControl ??= AuthorFirstNameBox;
+        }
+        if (string.IsNullOrWhiteSpace(authorLastName))
+        {
+            errors.Add("Author last name is required.");
+            firstInvalidControl ??= AuthorLastNameBox;
         }
 
         ErrorBox.Text = string.Join("\n", errors);
