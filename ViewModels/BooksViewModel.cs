@@ -22,12 +22,12 @@ public partial class BooksViewModel : ObservableObject
     {
         Books.Clear();
         foreach (var book in _service.GetBooks())
-            Books.Add(new BookRow(book, _service.GetAvailableCopies(book.Id)));
+            Books.Add(new BookRow(book, _service.IsBookAvailable(book.Id)));
     }
 
-    public void AddBook(Book book)
+    public void AddBooks(Book book, int copyCount)
     {
-        _service.AddBook(book);
+        _service.AddBooks(book, copyCount);
         Refresh();
     }
 
@@ -40,7 +40,7 @@ public partial class BooksViewModel : ObservableObject
 }
 
 /// <summary>Read-only display row combining Book data with live availability.</summary>
-public class BookRow(Book book, int available)
+public class BookRow(Book book, bool isAvailable)
 {
     public string Id           => book.Id;
     public string Title        => book.Title;
@@ -48,7 +48,5 @@ public class BookRow(Book book, int available)
     public string AuthorLastName  => book.AuthorLastName;
     public string ISBN         => book.ISBN;
     public string Genre        => book.Genre;
-    public int TotalCopies     => book.TotalCopies;
-    public int AvailableCopies => available;
-    public int CheckedOut      => TotalCopies - available;
+    public string Status       => isAvailable ? "Available" : "Checked Out";
 }

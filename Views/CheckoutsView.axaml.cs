@@ -16,14 +16,14 @@ public partial class CheckoutsView : UserControl
         if (GetWindow() is not Window owner) return;
 
         var availableBooks = vm.Service.GetBooks()
-            .Where(b => vm.Service.GetAvailableCopies(b.Id) > 0)
+            .Where(b => vm.Service.IsBookAvailable(b.Id))
             .ToList();
         var students = vm.Service.GetStudents().ToList();
 
         if (availableBooks.Count == 0 || students.Count == 0)
         {
             var msg = availableBooks.Count == 0
-                ? "No books with available copies."
+                ? "No books are currently available."
                 : "No students registered yet.";
             await MessageDialog.ShowAsync(owner, "Cannot Checkout", msg);
             return;

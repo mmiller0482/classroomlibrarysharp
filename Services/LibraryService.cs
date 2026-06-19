@@ -25,6 +25,7 @@ public class LibraryService
         Directory.CreateDirectory(dir);
         _dataPath = Path.Combine(dir, "library.json");
         _data = Load();
+        if (MigrateBookInstances()) Save();
     }
 
     // ── Queries ──────────────────────────────────────────────────────────────
@@ -36,25 +37,31 @@ public class LibraryService
     public IReadOnlyList<Checkout> GetActiveCheckouts() =>
         _data.Checkouts.Where(c => !c.IsReturned).ToList();
 
-    public int GetAvailableCopies(string bookId)
-    {
-        var book = _data.Books.FirstOrDefault(b => b.Id == bookId);
-        if (book is null) return 0;
-        var checkedOut = _data.Checkouts.Count(c => c.BookId == bookId && !c.IsReturned);
-        return Math.Max(0, book.TotalCopies - checkedOut);
-    }
+    public bool IsBookAvailable(string bookId) =>
+        _data.Books.Any(b => b.Id == bookId) &&
+        _data.Checkouts.All(c => c.BookId != bookId || c.IsReturned);
 
     public int GetActiveCheckoutCountForStudent(string studentId) =>
         _data.Checkouts.Count(c => c.StudentId == studentId && !c.IsReturned);
 
     // ── Books ─────────────────────────────────────────────────────────────────
 
-    public void AddBook(Book book) { _data.Books.Add(book); Save(); }
-
-    public void RemoveBook(string bookId)
+    public void AddBooks(Book book, int copyCount)
     {
+        var count = Math.Max(1, copyCount);
+        _data.Books.Add(book);
+        for (var i = 1; i < count; i++)
+            _data.Books.Add(book.CreateCopy());
+        Save();
+    }
+
+    public bool RemoveBook(string bookId)
+    {
+        if (!IsBookAvailable(bookId)) return false;
+
         _data.Books.RemoveAll(b => b.Id == bookId);
         Save();
+        return true;
     }
 
     // ── Students ──────────────────────────────────────────────────────────────
@@ -69,10 +76,10 @@ public class LibraryService
 
     // ── Checkouts ─────────────────────────────────────────────────────────────
 
-    /// <summary>Returns false if no copies are available.</summary>
+    /// <summary>Returns false if this physical book is already checked out.</summary>
     public bool CheckoutBook(string bookId, string studentId, DateTime dueDate)
     {
-        if (GetAvailableCopies(bookId) <= 0) return false;
+        if (!IsBookAvailable(bookId)) return false;
 
         _data.Checkouts.Add(new Checkout
         {
@@ -107,6 +114,58 @@ public class LibraryService
         {
             return new LibraryData();
         }
+    }
+
+    /// <summary>
+    /// Expands legacy quantity-based books into physical instances and assigns each
+    /// historical checkout to a concrete instance without overlapping loans.
+    /// </summary>
+    private bool MigrateBookInstances()
+    {
+        var migrated = false;
+
+        foreach (var book in _data.Books.ToList())
+        {
+            var copyCount = book.ImportedCopyCount;
+            if (copyCount <= 1) continue;
+
+            migrated = true;
+            var instances = new List<Book> { book };
+            for (var i = 1; i < copyCount; i++)
+            {
+                var copy = book.CreateCopy();
+                instances.Add(copy);
+                _data.Books.Add(copy);
+            }
+
+            var checkouts = _data.Checkouts
+                .Where(c => c.BookId == book.Id)
+                .OrderBy(c => c.CheckoutDate)
+                .ThenBy(c => c.Id)
+                .ToList();
+            var availableOn = instances.ToDictionary(b => b.Id, _ => DateTime.MinValue);
+
+            foreach (var checkout in checkouts)
+            {
+                var instance = instances.FirstOrDefault(candidate =>
+                    availableOn[candidate.Id] <= checkout.CheckoutDate);
+
+                // Preserve inconsistent legacy data rather than assigning overlapping
+                // checkouts to the same physical object.
+                if (instance is null)
+                {
+                    instance = book.CreateCopy();
+                    instances.Add(instance);
+                    _data.Books.Add(instance);
+                    availableOn[instance.Id] = DateTime.MinValue;
+                }
+
+                checkout.BookId = instance.Id;
+                availableOn[instance.Id] = checkout.ReturnDate ?? DateTime.MaxValue;
+            }
+        }
+
+        return migrated;
     }
 
     private void Save()

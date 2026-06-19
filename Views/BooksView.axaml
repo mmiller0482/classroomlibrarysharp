@@ -29,9 +29,7 @@
                 <DataGridTextColumn Header="Author Last Name"   Binding="{Binding AuthorLastName}"  Width="130" />
                 <DataGridTextColumn Header="Genre"              Binding="{Binding Genre}"           Width="110" />
                 <DataGridTextColumn Header="ISBN"               Binding="{Binding ISBN}"            Width="130" />
-                <DataGridTextColumn Header="Total"              Binding="{Binding TotalCopies}"     Width="60"  />
-                <DataGridTextColumn Header="Available"          Binding="{Binding AvailableCopies}" Width="80"  />
-                <DataGridTextColumn Header="Checked Out"        Binding="{Binding CheckedOut}"      Width="95"  />
+                <DataGridTextColumn Header="Status"             Binding="{Binding Status}"          Width="100" />
             </DataGrid.Columns>
         </DataGrid>
 

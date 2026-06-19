@@ -14,8 +14,8 @@ public partial class BooksView : UserControl
         if (DataContext is not BooksViewModel vm) return;
         if (GetWindow() is not Window owner) return;
         var dialog = new AddBookDialog();
-        var result = await dialog.ShowDialog<Models.Book?>(owner);
-        if (result is not null) vm.AddBook(result);
+        var result = await dialog.ShowDialog<AddBookResult?>(owner);
+        if (result is not null) vm.AddBooks(result.Book, result.CopyCount);
     }
 
     private void OnRemoveBookClick(object? sender, RoutedEventArgs e)

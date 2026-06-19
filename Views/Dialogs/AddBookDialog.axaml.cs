@@ -21,14 +21,17 @@ public partial class AddBookDialog : Window
         if (!ValidateInputs(title, authorFirstName, authorLastName))
             return;
 
-        Close(new Book
+        Close(new AddBookResult
         {
-            Title           = title,
-            AuthorFirstName = authorFirstName,
-            AuthorLastName  = authorLastName,
-            Genre           = genre,
-            ISBN            = isbn,
-            TotalCopies     = (int)(CopiesBox.Value ?? 1m)
+            Book = new Book
+            {
+                Title           = title,
+                AuthorFirstName = authorFirstName,
+                AuthorLastName  = authorLastName,
+                Genre           = genre,
+                ISBN            = isbn
+            },
+            CopyCount = (int)(CopiesBox.Value ?? 1m)
         });
     }
 
