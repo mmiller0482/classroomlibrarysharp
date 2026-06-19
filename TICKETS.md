@@ -54,6 +54,12 @@ This file contains actionable tasks to improve the Classroom Library application
 - **Files**: `Views/BooksView.axaml`, `Views/Dialogs/AddBookDialog.axaml`, `Views/Dialogs/AddBookDialog.axaml.cs`, `Models/Book.cs`
 - **Goal**: Keep name entry and display consistent across students and authors.
 
+### [ ] M6. Uniquify all instances of books, regardless of same title and author
+- **Description**: Every book is a physical object, and each of those physical objects can be checked out by a student.
+We need to be able to tell when a student is checking out a particular instances of a book. So no need for copy number, jsut separate instances.
+- **Files**: idk 
+- **Goal**: Uniquifiy all instances of books. Perhaps provide a "rolled up" view when books happen to have the same fields otherwise.
+
 ---
 
 ## 🔴 Priority: High (Core Features)
