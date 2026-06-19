@@ -15,8 +15,10 @@
         </StackPanel>
 
         <!-- Book list -->
-        <DataGrid ItemsSource="{Binding Books}"
+        <DataGrid x:Name="BooksGrid"
+                  ItemsSource="{Binding Books}"
                   SelectedItem="{Binding SelectedBook}"
+                  SelectionMode="Extended"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   GridLinesVisibility="Horizontal"

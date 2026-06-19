@@ -24,8 +24,8 @@ public class LibraryService
         var dir = Path.Combine(appData, "ClassroomLibrary");
         Directory.CreateDirectory(dir);
         _dataPath = Path.Combine(dir, "library.json");
-        _data = Load();
-        if (MigrateBookInstances()) Save();
+        _data = Load(out var wasReset);
+        if (wasReset) Save();
     }
 
     // ── Queries ──────────────────────────────────────────────────────────────
@@ -55,23 +55,30 @@ public class LibraryService
         Save();
     }
 
-    public bool RemoveBook(string bookId)
+    public int RemoveBooks(IEnumerable<string> bookIds)
     {
-        if (!IsBookAvailable(bookId)) return false;
+        var removableIds = bookIds
+            .Where(IsBookAvailable)
+            .ToHashSet();
+        if (removableIds.Count == 0) return 0;
 
-        _data.Books.RemoveAll(b => b.Id == bookId);
+        var removed = _data.Books.RemoveAll(b => removableIds.Contains(b.Id));
         Save();
-        return true;
+        return removed;
     }
 
     // ── Students ──────────────────────────────────────────────────────────────
 
     public void AddStudent(Student student) { _data.Students.Add(student); Save(); }
 
-    public void RemoveStudent(string studentId)
+    public int RemoveStudents(IEnumerable<string> studentIds)
     {
-        _data.Students.RemoveAll(s => s.Id == studentId);
+        var ids = studentIds.ToHashSet();
+        var removed = _data.Students.RemoveAll(s => ids.Contains(s.Id));
+        if (removed == 0) return 0;
+
         Save();
+        return removed;
     }
 
     // ── Checkouts ─────────────────────────────────────────────────────────────
@@ -102,71 +109,32 @@ public class LibraryService
 
     // ── Persistence ───────────────────────────────────────────────────────────
 
-    private LibraryData Load()
+    private LibraryData Load(out bool wasReset)
     {
-        if (!File.Exists(_dataPath)) return new LibraryData();
+        wasReset = false;
+        if (!File.Exists(_dataPath)) return CreateEmptyData();
+
         try
         {
             var json = File.ReadAllText(_dataPath);
-            return JsonSerializer.Deserialize<LibraryData>(json) ?? new LibraryData();
+            var data = JsonSerializer.Deserialize<LibraryData>(json);
+            if (data?.SchemaVersion == LibraryData.CurrentSchemaVersion)
+                return data;
         }
-        catch
+        catch (JsonException)
         {
-            return new LibraryData();
+            // Invalid and obsolete databases are intentionally reset while the app
+            // is pre-production. There is no legacy migration path.
         }
+
+        wasReset = true;
+        return CreateEmptyData();
     }
 
-    /// <summary>
-    /// Expands legacy quantity-based books into physical instances and assigns each
-    /// historical checkout to a concrete instance without overlapping loans.
-    /// </summary>
-    private bool MigrateBookInstances()
+    private static LibraryData CreateEmptyData() => new()
     {
-        var migrated = false;
-
-        foreach (var book in _data.Books.ToList())
-        {
-            var copyCount = book.ImportedCopyCount;
-            if (copyCount <= 1) continue;
-
-            migrated = true;
-            var instances = new List<Book> { book };
-            for (var i = 1; i < copyCount; i++)
-            {
-                var copy = book.CreateCopy();
-                instances.Add(copy);
-                _data.Books.Add(copy);
-            }
-
-            var checkouts = _data.Checkouts
-                .Where(c => c.BookId == book.Id)
-                .OrderBy(c => c.CheckoutDate)
-                .ThenBy(c => c.Id)
-                .ToList();
-            var availableOn = instances.ToDictionary(b => b.Id, _ => DateTime.MinValue);
-
-            foreach (var checkout in checkouts)
-            {
-                var instance = instances.FirstOrDefault(candidate =>
-                    availableOn[candidate.Id] <= checkout.CheckoutDate);
-
-                // Preserve inconsistent legacy data rather than assigning overlapping
-                // checkouts to the same physical object.
-                if (instance is null)
-                {
-                    instance = book.CreateCopy();
-                    instances.Add(instance);
-                    _data.Books.Add(instance);
-                    availableOn[instance.Id] = DateTime.MinValue;
-                }
-
-                checkout.BookId = instance.Id;
-                availableOn[instance.Id] = checkout.ReturnDate ?? DateTime.MaxValue;
-            }
-        }
-
-        return migrated;
-    }
+        SchemaVersion = LibraryData.CurrentSchemaVersion
+    };
 
     private void Save()
     {

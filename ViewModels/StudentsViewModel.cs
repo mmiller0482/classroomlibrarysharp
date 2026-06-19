@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassroomLibrary.Models;
 using ClassroomLibrary.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -34,11 +35,11 @@ public partial class StudentsViewModel : ObservableObject
         Refresh();
     }
 
-    public void RemoveSelected()
+    public int RemoveStudents(IEnumerable<string> studentIds)
     {
-        if (SelectedStudent is null) return;
-        _service.RemoveStudent(SelectedStudent.Id);
+        var removed = _service.RemoveStudents(studentIds);
         Refresh();
+        return removed;
     }
 }
 

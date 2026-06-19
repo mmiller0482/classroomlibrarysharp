@@ -15,8 +15,10 @@
         </StackPanel>
 
         <!-- Student list -->
-        <DataGrid ItemsSource="{Binding Students}"
+        <DataGrid x:Name="StudentsGrid"
+                  ItemsSource="{Binding Students}"
                   SelectedItem="{Binding SelectedStudent}"
+                  SelectionMode="Extended"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   GridLinesVisibility="Horizontal"

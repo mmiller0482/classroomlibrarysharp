@@ -11,21 +11,6 @@ public class Student
     public string Grade { get; set; } = string.Empty;
     public string HomeroomTeacher { get; set; } = string.Empty;
 
-    // Read the old single Name field as FirstName without attempting to split it.
-    [JsonPropertyName("Name")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? LegacyName
-    {
-        get => null;
-        set
-        {
-            if (string.IsNullOrWhiteSpace(FirstName))
-            {
-                FirstName = value ?? string.Empty;
-            }
-        }
-    }
-
     [JsonIgnore]
     public string FullName => string.IsNullOrWhiteSpace(LastName)
         ? FirstName

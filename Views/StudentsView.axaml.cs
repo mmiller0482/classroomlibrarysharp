@@ -1,3 +1,4 @@
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using ClassroomLibrary.ViewModels;
@@ -20,7 +21,13 @@ public partial class StudentsView : UserControl
 
     private void OnRemoveStudentClick(object? sender, RoutedEventArgs e)
     {
-        if (DataContext is StudentsViewModel vm) vm.RemoveSelected();
+        if (DataContext is not StudentsViewModel vm) return;
+
+        var ids = StudentsGrid.SelectedItems
+            .OfType<StudentRow>()
+            .Select(row => row.Id)
+            .ToList();
+        vm.RemoveStudents(ids);
     }
 
     private Window? GetWindow() => TopLevel.GetTopLevel(this) as Window;

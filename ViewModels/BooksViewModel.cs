@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassroomLibrary.Models;
 using ClassroomLibrary.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -31,11 +32,11 @@ public partial class BooksViewModel : ObservableObject
         Refresh();
     }
 
-    public void RemoveSelected()
+    public int RemoveBooks(IEnumerable<string> bookIds)
     {
-        if (SelectedBook is null) return;
-        _service.RemoveBook(SelectedBook.Id);
+        var removed = _service.RemoveBooks(bookIds);
         Refresh();
+        return removed;
     }
 }
 

@@ -60,10 +60,10 @@ We need to be able to tell when a student is checking out a particular instances
 - **Files**: idk 
 - **Goal**: Uniquifiy all instances of books. Perhaps provide a "rolled up" view when books happen to have the same fields otherwise.
 
-### [] M7. Remove All traces of legacy support
-- **Description**: Till present, when making changes to "db", we have added support for legacy data. But The app is nowhere near close to being production ready. Just delete the legacy support and move to the new formats.
-- **Files**: idk
-- **Goal**: Remove legacy workaround support.
+### [x] M7. Remove All Traces of Legacy Support
+- **Description**: Until now, database model changes have included support for legacy data. Since the app is not production-ready, remove that compatibility code and use only the current format.
+- **Files**: `Models/Book.cs`, `Models/Student.cs`, `Models/LibraryData.cs`, `Services/LibraryService.cs`
+- **Goal**: Remove legacy workarounds and reset incompatible databases to the current schema.
 
 ---
 
@@ -100,13 +100,12 @@ We need to be able to tell when a student is checking out a particular instances
 
 ## ⭕️ Priority: Bug Fixes
 
-### [ ] B1. Book or student deletion works on multiple selections
+### [x] B1. Book or student deletion works on multiple selections
 - **Description**: When 2 or more books or students are selected, only a single one is deleted with delete button
-- **Files**: IDK
+- **Files**: `Views/BooksView.axaml`, `Views/BooksView.axaml.cs`, `Views/StudentsView.axaml`, `Views/StudentsView.axaml.cs`
 - **Goal**: allow multiple selections to be deleted
 
-### [ ] B2. Sometimes selectd Book or Students are not deleted
+### [x] B2. Sometimes Selected Books or Students Are Not Deleted
 - **Description**: May have to do with legacy books having multiple copies, but deleting a selection does not seem to delete that instance
-- **Files**: IDK
+- **Files**: `Services/LibraryService.cs`, `Views/BooksView.axaml.cs`
 - **Goal**: Fix a bug
-
