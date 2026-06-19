@@ -92,3 +92,16 @@ We need to be able to tell when a student is checking out a particular instances
 - **Description**: App currently follows system color scheme. Can we implement something to allow it to define its own color scheme(s)?"
 - **Files**: `Themes/ClassroomTheme.axaml`, `Services/ThemeService.cs`, `Views/SettingsView.axaml`
 - **Goal**: Beautify the app and setup framework to allow for future theming. 
+
+## ⭕️ Priority: Bug Fixes
+
+### [ ] B1. Book or student deletion works on multiple selections
+- **Description**: When 2 or more books or students are selected, only a single one is deleted with delete button
+- **Files**: IDK
+- **Goal**: allow multiple selections to be deleted
+
+### [ ] B2. Sometimes selectd Book or Students are not deleted
+- **Description**: May have to do with legacy books having multiple copies, but deleting a selection does not seem to delete that instance
+- **Files**: IDK
+- **Goal**: Fix a bug
+
